@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-    { path: '/login', name: 'Login', component: () => import('@/view/login/Login.vue'), meta: { title: '登录' } },
+    { path: '/', name: 'Login', component: () => import('@/view/login/Login.vue'), meta: { title: '登录' } },
     {
-        path: '/', name: 'Index',
+        path: '/index', name: 'Index',
         component: () => import('@/view/layout/Index.vue'),
         meta: { title: '主页' }
     },

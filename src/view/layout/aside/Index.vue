@@ -7,8 +7,7 @@
       <span>{{item.meta &&item.meta.title}}</span>
     </el-menu-item>
     </template>
-  
-    <el-sub-menu v-else>
+    <el-sub-menu :index="item.path" v-else>
       <template #title>
         <el-icon>
           <location />
