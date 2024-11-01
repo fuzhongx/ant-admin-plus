@@ -1,25 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-    { path: '/', name: 'Login', component: () => import('@/view/login/Login.vue'), meta: { title: '登录' } },
+    { path: '/login', name: 'Login', component: () => import('@/view/login/Login.vue'), meta: { title: '登录' } },
     {
-        path: '/index', name: 'Index',
+        path: '/', name: 'Index',
         component: () => import('@/view/layout/Index.vue'),
         meta: { title: '主页' }
     },
     {
         path: '/system',
         name: 'System',
-        component: () => import('@/view/layout/Index.vue'),
-        meta: { title: '系统管理' },
-        children: [
-            {
-                path: '/scroll',
-                name: 'Scroll',
-                component: () => import('@/view/data/Index.vue'),
-                meta: { title: '滚动' }
-            },
-        ]
+        component: () => import('@/view/error/Index.vue'),
+        meta: { title: '问题管理' }
     }, 
     {
         path: '/system',

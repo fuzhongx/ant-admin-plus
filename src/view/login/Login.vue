@@ -151,11 +151,12 @@ const submitForm = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
 }
 
 .demo-ruleForm {
   width: 360px;
-  height: 360px;
+  height: 360px; 
 }
 
 .Login-title {

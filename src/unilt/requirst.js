@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 const service = axios.create({
     baseURL: process.env.VUE_APP_FLAG,
     timeout: 5000

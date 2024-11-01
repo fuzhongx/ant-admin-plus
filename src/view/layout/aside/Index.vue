@@ -7,7 +7,7 @@
       <span>{{item.meta &&item.meta.title}}</span>
     </el-menu-item>
     </template>
-    <el-sub-menu :index="item.path" v-else>
+    <el-sub-menu :index="1"  v-else>
       <template #title>
         <el-icon>
           <location />
@@ -17,13 +17,12 @@
       <template v-for="child in item.children" :key="child.path">
         <el-menu-item :index="child.path">{{ child.meta&&child.meta.title }}</el-menu-item>
       </template>
-    
     </el-sub-menu>
   </template>
    <template >
    </template>
-    
   </el-menu>
+  
 </template>
 
 <script setup>
@@ -38,7 +37,15 @@ import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import bus from '@/unilt/evenBus.js'
 
 let isCollapse = ref(false)
-
+ //路由
+ const { options } = useRouter()
+        const routes = options.routes
+        const collapsed=ref('')
+        const data = reactive({   
+            selectedKeys: localStorage.getItem('selectedKeys') ? [localStorage.getItem('selectedKeys')] : [],//默认被选中哪一个
+            openKeys: localStorage.getItem('openKeys') ? [localStorage.getItem('openKeys')] : [],//展开菜单
+            src: 'https://foruda.gitee.com/images/1699583663424602079/6ae13aa7_1151004.png'
+        })
 
 onMounted(() => {
   bus.on('showCollapse', (data) => {
@@ -51,10 +58,6 @@ onUnmounted(() => {
 })
 
 
-
-const { options } = useRouter()
-const routes=options.routes
-console.log(routes);
 
 const handleOpen = (key, keyPath) => {
 
