@@ -33,6 +33,10 @@ function btnCollapse() {
     isCollapses.value = !isCollapses.value
     bus.emit('showCollapse', isCollapses.value)
 }
+function handleCommand(res){
+console.log(res);
+}
+
 
 </script>
 

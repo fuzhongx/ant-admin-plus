@@ -5,7 +5,7 @@ const service = axios.create({
     baseURL: process.env.VUE_APP_FLAG,
     timeout: 5000
 })
-
+console.log(process.env.VUE_APP_FLAG);
 service.interceptors.request.use((config) => {
     if (localStorage.getItem('token')) {
         config.headers['token'] = localStorage.getItem('token');
@@ -16,7 +16,7 @@ service.interceptors.request.use((config) => {
     (error) => {
         return Promise.reject(error);
     },
-    service.interceptors.response.use((response) => {
+service.interceptors.response.use((response) => {
         return response;
     }),
     (error) => {
