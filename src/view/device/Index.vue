@@ -1,5 +1,5 @@
 <template>
-  设备
+  设备管理
 </template>
 
 <script>

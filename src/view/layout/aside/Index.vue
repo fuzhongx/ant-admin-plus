@@ -10,44 +10,59 @@
     active-text-color="rgb(64, 158, 255)"
     background-color="rgb(48, 65, 86)"
   >
+    <!-- <a-menu-item>
+      <div v-if="collapsed">
+        <span class="anticon"></span
+        ><span class="Logo-title-fs-18"> 云平台 </span>
+      </div>
+      <div v-else>
+        <span class="anticon"></span>
+        <span class="Logo-title-fs-18"> 云平台 </span>
+      </div>
+    </a-menu-item> -->
     <template v-for="items in routers" :key="items.path">
       <template v-if="!items.hidden">
         <el-menu-item
           :key="items.path"
-          :index="items.path"
           v-if="hasOnlychildren(items)"
+          :index="items.children[0].path"
         >
-          <el-icon><location /></el-icon>
+          <svg-icon :iconName=items.children[0].meta.icon class="icon_all"></svg-icon>
           <span class="anticon"></span>
           <span>
             {{ items.children[0].meta && items.children[0].meta.title }}
           </span>
         </el-menu-item>
-      </template>
-      
-        <el-sub-menu v-else>
+        <!--子级-->
+        <el-sub-menu v-else :index="items.children[0].path">
           <template #title>
-            <el-icon><location /></el-icon>
-            <span class="anticon">{{
-              items.meta && items.meta.title
-            }}</span></template
-          >
-          <template v-if="items.children.length">
+            <svg-icon :iconName=items.meta.icon class="icon_all"></svg-icon>
+            <span class="anticon"></span>
+            <span>
+              {{ items.meta && items.meta.title }}
+            </span>
+          </template>
+
+          <template v-if="items.children">
             <el-menu-item
-              :index="childs.path"
-              v-for="childs in items.children"
-              :key="childs.path"
+              v-for="child in items.children"
+              :key="child.path"
+              :index="child.path"
             >
-              <template v-if="!childs.children">
-                {{ childs.meta && childs.meta.title }}
+              <template v-if="!child.children">
+                <svg-icon :iconName=child.meta.icon class="icon_all"></svg-icon>
+                <span class="anticon"></span>
+                <span>
+                  {{ child.meta && child.meta.title }}
+                </span>
               </template>
             </el-menu-item>
           </template>
         </el-sub-menu>
       </template>
+    </template>
   </el-menu>
 </template>
-
 <script setup>
 import {
   Document,
@@ -63,7 +78,7 @@ let isCollapse = ref(false);
 //路由
 const { options } = useRouter();
 const routers = options.routes;
-console.log(routers, 11);
+
 const collapsed = ref("");
 const data = reactive({
   selectedKeys: localStorage.getItem("selectedKeys")
@@ -76,20 +91,19 @@ const data = reactive({
 
 //检测是否只有一个子路由
 const hasOnlychildren = (data) => {
-  console.log(data,1);
+  console.log(data, 1);
   if (!data.children) {
     return false;
   }
   //过滤隐藏的子路由
-  const routes = data.children.filter(item=>item.children ? false : true);
+  const routes = data.children.filter((item) => (item.children ? false : true));
   // 判断最终结果
   if (routes.length == 1) {
-    console.log(data,'等于1');
+    console.log(data, "等于1");
     return true;
   } else {
     return false;
   }
- 
 };
 
 onMounted(() => {
@@ -104,6 +118,10 @@ const handleClose = (key, keyPath) => {};
 </script>
 
 <style lang="scss" scoped>
+.icon_all{
+  margin: 0 10px 0 0;
+  font-size: 20px;
+}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 220px;
   min-height: 400px;

@@ -1,16 +1,28 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-    { path: '/', name: 'Login',  hidden: false, component: () => import('@/view/login/Login.vue'), meta: { title: '登录' } },
+    { path: '/', name: 'Login',  hidden: true, component: () => import('@/view/login/Login.vue'), meta: { title: '登录' } },
     {
         path: '/index', name: 'Index',
         component: () => import('@/view/layout/Index.vue'),
-        meta: { title: '主页' },
+        meta: { title: '工作台' },
         children: [
             {
-                path: '/index', name: 'Index',
+                path: '/homeindex', name: 'HomeIndex',
                 component: () => import('@/view/home/Index.vue'),
-                meta: { title: '主页' }
+                meta: { title: '工作台',icon:'home' }
+            },
+        ]
+    },
+    {
+        path: '/device', name: 'Device',
+        component: () => import('@/view/layout/Index.vue'),
+        meta: { title: '设备管理' },
+        children: [
+            {
+                path: '/deviceIndex', name: 'DeviceIndex',
+                component: () => import('@/view/device/Index.vue'),
+                meta: { title: '设备管理',icon:'device' }
             },
         ]
     },
@@ -18,13 +30,43 @@ const routes = [
         path: '/error',
         name: 'Error',
         component: () => import('@/view/layout/Index.vue'),
-        meta: { title: '问题管理' },
+        meta: { title: '报警管理' },
         children: [
             {
-                path: '/error',
-                name: 'Error',
+                path: '/errorindex',
+                name: 'ErrorIndex',
                 component: () => import('@/view/error/Index.vue'),
-                meta: { title: '问题管理' },
+                meta: { title: '报警管理',icon:'error' },
+            },
+        ]
+
+    },
+    {
+        path: '/datas',
+        name: 'Datas',
+        component: () => import('@/view/layout/Index.vue'),
+        meta: { title: '数据检测' },
+        children: [
+            {
+                path: '/datasIndex',
+                name: 'DatasIndex',
+                component: () => import('@/view/data/Index.vue'),
+                meta: { title: '数据监测',icon:'datas' },
+            },
+        ]
+
+    },
+    {
+        path: '/video',
+        name: 'Video',
+        component: () => import('@/view/layout/Index.vue'),
+        meta: { title: '大华视频' },
+        children: [
+            {
+                path: '/videoIndex',
+                name: 'VideoIndex',
+                component: () => import('@/view/video/Index.vue'),
+                meta: { title: '大华视频',icon:'video' },
             },
         ]
 
@@ -33,25 +75,25 @@ const routes = [
         path: '/system',
         name: 'System',
         component: () => import('@/view/layout/Index.vue'),
-        meta: { title: '系统管理' },
+        meta: { title: '系统管理',icon:'system' },
         children: [
             {
                 path: '/user',
                 name: 'User',
                 component: () => import('@/view/system/User.vue'),
-                meta: { title: '用户管理' }
+                meta: { title: '用户管理',icon:'user' }
             },
             {
                 path: '/role',
                 name: 'Role',
                 component: () => import('@/view/system/Role.vue'),
-                meta: { title: '角色管理' }
+                meta: { title: '角色管理',icon:'role' }
             },
             {
                 path: '/dictionary',
                 name: 'Dictionary',
                 component: () => import('@/view/system/Dictionary.vue'),
-                meta: { title: '字典管理' }
+                meta: { title: '字典管理',icon:'home' }
             },
         ]
     },
@@ -59,7 +101,7 @@ const routes = [
         path: '/compoment',
         name: 'Compoment',
         component: () => import('@/view/layout/Index.vue'),
-        meta: { title: '组件管理' },
+        meta: { title: '组件管理',icon:'compoment' },
         children: [
             {
                 path: '/image',
