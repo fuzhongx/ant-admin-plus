@@ -20,6 +20,8 @@
             type="text"
             autocomplete="off"
             class="login_user"
+            id="userValue"
+          
           />
         </el-form-item>
         <el-form-item prop="checkPass" class="login_psd">
@@ -28,6 +30,8 @@
             v-model="ruleForm.checkPass"
             type="password"
             autocomplete="off"
+            id="pasdValue"
+          
           />
         </el-form-item>
         <el-form-item prop="age">
@@ -35,7 +39,7 @@
         </el-form-item>
         <el-form-item>
           <div class="unpaw">
-            <span>记住密码</span>
+            <span> <el-checkbox class="checkbox-c-fff" @change="checkedShow()" label="记住密码" v-model="data.checkedValue"> </el-checkbox></span>
             <span>忘记密码</span>
           </div>
         </el-form-item>
@@ -56,7 +60,7 @@
 <script setup>
 import { userLogin, deviceList } from '@/api/account.js'
 import {  deviceListCom } from '@/api/device.js'
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router';
 
 const ruleFormRef = ref()
@@ -66,6 +70,9 @@ const ruleForm = reactive({
   checkPass: '',
   age: '',
   tokenKey: ''
+})
+const data=reactive({
+  checkedValue:''
 })
 const checkAge = (rule, value, callback) => {
   if (!value) {
@@ -89,6 +96,28 @@ const validatePass2 = (rule, value, callback) => {
   } else {
     callback()
   }
+}
+onMounted(()=>{})
+// const a=()=>{
+//   if(localStorage.getItem('checkedShow')){
+//    document.getElementById('pasdValue').value=localStorage.getItem('checkPass');
+//    document.getElementById('userValue').value=localStorage.getItem('pass');
+//   }
+// }
+
+const checkedShow=()=>{
+  if(data.checkedValue){
+    localStorage.setItem('checkedShow',data.checkedValue)
+    localStorage.setItem('checkPass',ruleForm.checkPass)
+    localStorage.setItem('pass',ruleForm.pass)
+   
+    
+  }else{
+    localStorage.removeItem('checkedShow')
+    localStorage.removeItem('checkPass')
+    localStorage.removeItem('pass')
+  }
+
 }
 const rules = reactive({
   pass: [{ validator: validatePass, trigger: 'blur' }],
@@ -198,7 +227,9 @@ const submitForm = () => {
   justify-content: space-between;
   color: #aaa8a8;
 }
-
+.checkbox-c-fff{
+  color:#aaa8a8 ;
+}
 .btnSubmit {
   height: 44px;
   width: 100%;

@@ -7,3 +7,25 @@ export function deviceListCom(prarms){
         prarms
     })
 }
+export function deleteDevice(prarms){
+    return service({
+        url:'/device',
+        method:'put',
+        prarms
+    })
+}
+
+export function putDevice(data){
+    return service({
+        url:'/device',
+        method:'delete',
+        data
+    })
+}
+export function addDevice(data){
+    return service({
+        url:'/device',
+        method:'post',
+        data
+    })
+}

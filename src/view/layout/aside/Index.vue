@@ -27,7 +27,10 @@
           v-if="hasOnlychildren(items)"
           :index="items.children[0].path"
         >
-          <svg-icon :iconName=items.children[0].meta.icon class="icon_all"></svg-icon>
+          <svg-icon
+            :iconName="items.children[0].meta.icon"
+            class="icon_all"
+          ></svg-icon>
           <span class="anticon"></span>
           <span>
             {{ items.children[0].meta && items.children[0].meta.title }}
@@ -36,7 +39,7 @@
         <!--子级-->
         <el-sub-menu v-else :index="items.children[0].path">
           <template #title>
-            <svg-icon :iconName=items.meta.icon class="icon_all"></svg-icon>
+            <svg-icon :iconName="items.meta.icon" class="icon_all"></svg-icon>
             <span class="anticon"></span>
             <span>
               {{ items.meta && items.meta.title }}
@@ -50,7 +53,10 @@
               :index="child.path"
             >
               <template v-if="!child.children">
-                <svg-icon :iconName=child.meta.icon class="icon_all"></svg-icon>
+                <svg-icon
+                  :iconName="child.meta.icon"
+                  class="icon_all"
+                ></svg-icon>
                 <span class="anticon"></span>
                 <span>
                   {{ child.meta && child.meta.title }}
@@ -64,12 +70,6 @@
   </el-menu>
 </template>
 <script setup>
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting,
-} from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { onMounted, onUnmounted, reactive, ref } from "vue";
 import bus from "@/unilt/evenBus.js";
@@ -91,7 +91,6 @@ const data = reactive({
 
 //检测是否只有一个子路由
 const hasOnlychildren = (data) => {
-  console.log(data, 1);
   if (!data.children) {
     return false;
   }
@@ -99,7 +98,6 @@ const hasOnlychildren = (data) => {
   const routes = data.children.filter((item) => (item.children ? false : true));
   // 判断最终结果
   if (routes.length == 1) {
-    console.log(data, "等于1");
     return true;
   } else {
     return false;
@@ -118,7 +116,7 @@ const handleClose = (key, keyPath) => {};
 </script>
 
 <style lang="scss" scoped>
-.icon_all{
+.icon_all {
   margin: 0 10px 0 0;
   font-size: 20px;
 }

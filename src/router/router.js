@@ -107,13 +107,13 @@ const routes = [
                 path: '/image',
                 name: 'Image',
                 component: () => import('@/view/compoment/Image.vue'),
-                meta: { title: '图片预览' }
+                meta: { title: '图片预览',icon:'' }
             },
             {
                 path: '/fenye',
                 name: 'Fenye',
                 component: () => import('@/view/compoment/Fenye.vue'),
-                meta: { title: '前端分页' }
+                meta: { title: '前端分页',icon:'' }
             },
         ]
     },
