@@ -1,10 +1,10 @@
 <template>
   <div class="header-h-40 header-p">
     <label for="username">用户名</label>
-    <el-input placeholder="Approved by" class="inp-w-60" />
-    <label for="phone">手机号</label>
-    <el-input placeholder="Approved by" class="inp-w-60" />
-    <el-button type="primary" class="btn-l-10">查询</el-button>
+    <el-input placeholder="请输入用户名" class="inp-w-60" />
+    <label for="phone" class="label-l-10">手机号</label>
+    <el-input placeholder="请输入手机号" class="inp-w-60" />
+    <el-button type="primary" class="btn-l-10" @click="selectbtn">查询</el-button>
     <el-button type="primary">添加</el-button>
   </div>
   <div>
@@ -12,7 +12,7 @@
       :data="data.dataTable"
       stripe
       style="width: 100%"
-      class="table-p-t-10"
+      class="table-p-t-30"
       fit
       :cell-style="{ textAlign: 'center' }"
       :header-cell-style="{ 'text-align': 'center' }"
@@ -62,9 +62,8 @@
 </template>
 
 <script setup>
-import { ElMessageBox } from "element-plus";
 
-import { userList, } from "@/api/system.js";
+import { userList,selectRole } from "@/api/system.js";
 import { onMounted, reactive, ref } from "vue";
 const dialogFormVisible = ref(false);
 const data = reactive({
@@ -74,22 +73,32 @@ const data = reactive({
 onMounted(()=>{
  
 })
+// const selectbtn=()=>{
+//   selectRole({
+//     roleName:'%E4%BD%A0%E5%A5%BD',
+//     pageNum:1,
+//     pageSize:10
+//   }).then(res=>{
+//     console.log(res,'查询');
+//   })
+// }
 userList().then((res) => {
   console.log(res, "用户");
   data.dataTable = res.data.data;
-  // data.dataTable.id=parseInt(data.dataTable.id)
 });
 
 </script>
 
 <style lang="scss" scoped>
 /* 移除表格行点击时出现的黑色边框 */
-
+.label-l-10{
+  margin-left: 20px;
+}
 .header-p {
   padding: 10px;
 }
-.table-p-t-10 {
-  padding-top: 10px;
+.table-p-t-30 {
+  padding-top: 30px;
 }
 .btn-l-10 {
   margin-left: 10px;

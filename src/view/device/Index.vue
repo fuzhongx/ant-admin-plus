@@ -1,7 +1,7 @@
 <template>
   <div class="header-h-40 header-p">
     <label for="传感器名称">传感器名称</label>
-    <el-input placeholder="Approved by" class="inp-w-60" />
+    <el-input placeholder="请输入传感器名称" class="inp-w-60" />
     <el-button type="primary" class="btn-l-10">查询</el-button>
     <el-button type="primary">添加</el-button>
   </div>
@@ -10,7 +10,7 @@
       :data="data.dataTable"
       stripe
       style="width: 100%"
-      class="table-p-t-10"
+      class="table-p-t-30"
       fit
       :cell-style="{ textAlign: 'center' }"
       :header-cell-style="{ 'text-align': 'center' }"
@@ -80,8 +80,8 @@ deviceListCom().then((res) => {
 .header-p {
   padding: 10px;
 }
-.table-p-t-10 {
-  padding-top: 10px;
+.table-p-t-30 {
+  padding-top: 30px;
 }
 .btn-l-10 {
   margin-left: 10px;
