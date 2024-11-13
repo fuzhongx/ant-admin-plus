@@ -7,6 +7,7 @@ import '@/unilt/svg.js'
 import SvgIcon from '@/components/SvgIcon/Index.vue'
 import VirtualScroller from 'vue3-virtual-scroller';
 import 'vue3-virtual-scroller/dist/vue3-virtual-scroller.css';
+import 'animate.css';
 
 
 // 定义特性标志

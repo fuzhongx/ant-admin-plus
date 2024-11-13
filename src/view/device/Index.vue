@@ -1,4 +1,5 @@
 <template>
+   <div  class="animate__animated animate__fadeInLeft">
   <div class="header-h-40 header-p">
     <label for="传感器名称">传感器名称</label>
     <el-input placeholder="请输入传感器名称" class="inp-w-60" />
@@ -15,7 +16,7 @@
       :cell-style="{ textAlign: 'center' }"
       :header-cell-style="{ 'text-align': 'center' }"
     >
-      <el-table-column prop="id" label="序号" header-align="center" />
+      <el-table-column prop="id" label="序号" header-align="center" :index="indexMethod"  type="index" min-width="60"/>
       <el-table-column prop="deviceName" label="名称" header-align="center" />
       <el-table-column prop="ip" label="IP地址" header-align="center" />
       <el-table-column prop="position" label="初始位置" header-align="center" />
@@ -58,6 +59,7 @@
       </el-table-column>
     </el-table>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -69,10 +71,18 @@ const dialogFormVisible = ref(false);
 const data = reactive({
   dataTable: [],
 });
+const indexMethod=(index)=>{
+  return index + 1
+}
 deviceListCom().then((res) => {
-  console.log(res, "设备");
   data.dataTable = res.data.data;
-  console.log(data.dataTable);
+  data.dataTable.map((val)=>{
+    val.id=parseInt(val.id)
+    var data=new Date(val.create_data)
+    var times=new Date(val.updata_data)
+    val.create_data=data.toLocaleString()
+    val.updata_data=times.toLocaleString()
+})
 });
 </script>
 

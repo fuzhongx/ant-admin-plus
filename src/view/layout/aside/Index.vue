@@ -121,7 +121,7 @@ const handleClose = (key, keyPath) => {};
   font-size: 20px;
 }
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 220px;
+  width: 240px;
   min-height: 400px;
 }
 

@@ -4,10 +4,10 @@
             <svg-icon iconName="open" class="icon-fs-30" @click="btnCollapse" v-if="!isCollapses"></svg-icon>
             <svg-icon iconName="close" class="icon-fs-30" @click="btnCollapse" v-else></svg-icon>
         </div>
-        <div class="header-m">
-        <el-breadcrumb :separator-icon="ArrowRight" v-for="item in navs" :key="item.paht">
-            <el-breadcrumb-item :to=item.path>{{item.path}}</el-breadcrumb-item>
-        </el-breadcrumb>
+        <div class="header-m" >
+            <el-breadcrumb :separator-icon="ArrowRight" >
+            <el-breadcrumb-item v-for="item in navs" :key="item.path">{{item.meta.title}}</el-breadcrumb-item>
+             </el-breadcrumb>
         </div>
         <div class="header-r">
             <el-dropdown @command="handleCommand">
@@ -18,7 +18,7 @@
                     <el-dropdown-menu>
                         <el-dropdown-item command="a">Action 1</el-dropdown-item>
                         <el-dropdown-item command="b">Action 2</el-dropdown-item>
-                        <el-dropdown-item command="c">退出登录</el-dropdown-item>
+                        <el-dropdown-item command="c" @click="outLogin">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -27,13 +27,15 @@
 </template>
 
 <script setup>
-import { useRoute} from "vue-router";
+import { ArrowRight } from '@element-plus/icons-vue'
+import { useRoute, useRouter} from "vue-router";
 import { computed, onMounted, reactive, ref} from 'vue';
 import bus from '@/unilt/evenBus.js'
 
 const isCollapses = ref(false)
 
-const {route}=useRoute()
+const route=useRoute()
+const router=useRouter()
 console.log(route,1);
 const navs=computed(()=>{
     return route.matched
@@ -41,6 +43,10 @@ const navs=computed(()=>{
 onMounted(()=>{
    
 })
+function outLogin(){
+    localStorage.removeItem('token')
+router.push('/')
+}
 function btnCollapse() {
     isCollapses.value = !isCollapses.value
     bus.emit('showCollapse', isCollapses.value)
@@ -53,6 +59,11 @@ console.log(res);
 </script>
 
 <style lang="scss" scoped>
+
+.el-breadcrumb__item:last-child .el-breadcrumb__separator {
+    display: block;
+    
+}
 .admin_icon_20{
     font-size: 30px;
 }

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
     { path: '/', name: 'Login',  hidden: true, component: () => import('@/view/login/Login.vue'), meta: { title: '登录' } },
@@ -6,11 +6,12 @@ const routes = [
         path: '/index', name: 'Index',
         component: () => import('@/view/layout/Index.vue'),
         meta: { title: '工作台' },
+        redirect:'/homeindex',
         children: [
             {
                 path: '/homeindex', name: 'HomeIndex',
                 component: () => import('@/view/home/Index.vue'),
-                meta: { title: '工作台',icon:'home' }
+                meta: { title: '主页',icon:'home' }
             },
         ]
     },
@@ -22,7 +23,7 @@ const routes = [
             {
                 path: '/deviceIndex', name: 'DeviceIndex',
                 component: () => import('@/view/device/Index.vue'),
-                meta: { title: '设备管理',icon:'device' }
+                meta: { title: '设备详情',icon:'device' }
             },
         ]
     },
@@ -36,7 +37,7 @@ const routes = [
                 path: '/errorindex',
                 name: 'ErrorIndex',
                 component: () => import('@/view/error/Index.vue'),
-                meta: { title: '报警管理',icon:'error' },
+                meta: { title: '报警详情',icon:'error' },
             },
         ]
 
@@ -51,7 +52,7 @@ const routes = [
                 path: '/datasIndex',
                 name: 'DatasIndex',
                 component: () => import('@/view/data/Index.vue'),
-                meta: { title: '数据监测',icon:'datas' },
+                meta: { title: '监测结果',icon:'datas' },
             },
         ]
 
@@ -120,7 +121,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 })
 

@@ -9,7 +9,7 @@
           <headers />
         </el-header>
         <el-main>
-          <mains />
+          <mains  class="animate__animated animate__fadeInLeft mains_h_100"/>
         </el-main>
       </el-container>
     </el-container>
@@ -24,6 +24,9 @@ import mains from '@/view/layout/main/Index.vue'
 </script>
 
 <style lang="scss" scoped>
+.mains_h_100{
+  height: 100%;
+}
 .el-aside {
     width: var(--el-aside-width,auto);
   }

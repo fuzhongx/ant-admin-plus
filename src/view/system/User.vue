@@ -1,5 +1,6 @@
 <template>
-  <div class="header-h-40 header-p">
+   <div  class="animate__animated animate__fadeInLeft">
+  <div class="header-h-40 header-p" >
     <label for="username">用户名</label>
     <el-input placeholder="请输入用户名" class="inp-w-60" />
     <label for="phone" class="label-l-10">手机号</label>
@@ -11,18 +12,18 @@
     <el-table
       :data="data.dataTable"
       stripe
-      style="width: 100%"
+      style="width: 100%;outline: none;border: none;"
       class="table-p-t-30"
-      fit
       :cell-style="{ textAlign: 'center' }"
       :header-cell-style="{ 'text-align': 'center' }"
     >
-      <el-table-column  prop="id" label="序号" header-align="center"/>
+      <el-table-column  fixed="left" label="序号" header-align="center" :index="indexMethod"  type="index"  min-width="60"/>
       <el-table-column prop="userName" label="用户名" header-align="center" />
       <el-table-column prop="sex" label="性别" header-align="center" />
       <el-table-column prop="age" label="年龄" header-align="center" />
-      <el-table-column prop="imgUrl" label="手机号" header-align="center"/>
-      <el-table-column prop="imgUrl" label="头像" header-align="center"/>
+      <el-table-column label="手机号" header-align="center">{{ data.rolePhone }}</el-table-column>
+      <el-table-column prop='roleName' label="角色" header-align="center" style="border: 1px solid #c05252;width: 30px;height: 20px;"/>
+      <el-table-column label="头像" header-align="center" style="border: 1px solid #c05252;width: 30px;height: 20px;"> </el-table-column>
       <el-table-column prop="create_data" label="创建时间" header-align="center"/>
       <el-table-column prop="updata_data" label="修改时间" header-align="center"/>
       <el-table-column fixed="right" label="操作">
@@ -59,6 +60,7 @@
       </el-table-column>
     </el-table>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -66,13 +68,19 @@
 import { userList,selectRole } from "@/api/system.js";
 import { onMounted, reactive, ref } from "vue";
 const dialogFormVisible = ref(false);
-const data = reactive({
+var data = reactive({
   dataTable: [],
+  roleTable:[],
+  rolePhone:'',
+  roleIcon:''
 });
 
 onMounted(()=>{
  
 })
+const indexMethod = (index) => {
+  return index + 1
+}
 // const selectbtn=()=>{
 //   selectRole({
 //     roleName:'%E4%BD%A0%E5%A5%BD',
@@ -85,12 +93,26 @@ onMounted(()=>{
 userList().then((res) => {
   console.log(res, "用户");
   data.dataTable = res.data.data;
+  data.dataTable.map((val)=>{
+    val.id=parseInt(val.id)
+    var data=new Date(val.create_data)
+    var times=new Date(val.updata_data)
+    val.create_data=data.toLocaleString()
+    val.updata_data=times.toLocaleString()
+    data.roleTable=val.imgUrl
+    data.rolePhone=val.imgUrl.slice(0,11)
+    data.roleIcon=val.imgUrl.slice(12)
+  })
 });
 
 </script>
 
 <style lang="scss" scoped>
 /* 移除表格行点击时出现的黑色边框 */
+.el-table__header {
+  outline: none;
+  border: none;
+}
 .label-l-10{
   margin-left: 20px;
 }
@@ -99,6 +121,8 @@ userList().then((res) => {
 }
 .table-p-t-30 {
   padding-top: 30px;
+  outline: none;
+  border: none;
 }
 .btn-l-10 {
   margin-left: 10px;

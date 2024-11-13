@@ -30,16 +30,16 @@ export function deleteRole(data){
         data
     })
 }
-export function Roles(data){
+export function BianjiRoles(data){
     return service({
-        url:'/roleList/'+`${id}`,
-        method:'get',
+        url:'/role',
+        method:'PUT',
         data
     })
 }
 export function selectRole(prarms){
     return service({
-        url:"/role?userName=&tel=&pageNum=1&pageSize=10&role=",
+        url:"/role",
         method:'get',
         prarms
     })
