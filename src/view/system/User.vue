@@ -109,6 +109,9 @@ userList().then((res) => {
 
 <style lang="scss" scoped>
 /* 移除表格行点击时出现的黑色边框 */
+:v-deep .el-table tr:focus {
+  outline:none
+}
 .el-table__header {
   outline: none;
   border: none;

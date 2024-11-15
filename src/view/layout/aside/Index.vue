@@ -10,16 +10,22 @@
     active-text-color="rgb(64, 158, 255)"
     background-color="rgb(48, 65, 86)"
   >
-    <!-- <a-menu-item>
-      <div v-if="collapsed">
-        <span class="anticon"></span
-        ><span class="Logo-title-fs-18"> 云平台 </span>
-      </div>
-      <div v-else>
+    <el-menu-item>
+        <template v-if="isCollapse">
+        <img src="@/assets/image/logo.png" class="img-w-h-23">
         <span class="anticon"></span>
-        <span class="Logo-title-fs-18"> 云平台 </span>
-      </div>
-    </a-menu-item> -->
+        <span class="Logo-title-fs-18">海洋信息综合服务 </span>
+       </template>
+        <template v-else>
+          <div class="title-center">
+            
+            <span class="anticon"></span>
+            <img src="@/assets/image/logo.png" class="img-w-h-35">
+            <span class="Logo-title-fs-18">海洋信息综合服务 </span>
+          </div>
+       
+        </template>
+    </el-menu-item>
     <template v-for="items in routers" :key="items.path">
       <template v-if="!items.hidden">
         <el-menu-item
@@ -116,6 +122,30 @@ const handleClose = (key, keyPath) => {};
 </script>
 
 <style lang="scss" scoped>
+.title-center{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(23, 163, 98);
+}
+.img-w-h-23{
+  width: 23px;
+  height: 23px;
+}
+.img-w-h-35{
+  width: 35px;
+  height: 32px;
+}
+.logo_title{
+  width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Logo-title-fs-18{
+  font-size: 18px;
+}
 .icon_all {
   margin: 0 10px 0 0;
   font-size: 20px;
